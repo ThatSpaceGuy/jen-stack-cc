@@ -25,6 +25,9 @@ app.listen('8080','localhost',function(){
   console.log('Server is listening on port 8080');
 });
 
+// setup 'public' as a static resource
+app.use(express.static('public'));
+
 // base url hit
 app.get('/', function(req,res){
   console.log('base url hit');
