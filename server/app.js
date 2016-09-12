@@ -47,6 +47,10 @@ app.post('/display', urlEncodedParser, function(req,res){
     case 'all':
       pagesToSend = jokes;
       break;
+    case 'random':
+      var randJoke = Math.floor(Math.random()*jokes.length);
+      pagesToSend = [jokes[randJoke]];
+      break;
     default:
       console.log('Error in server /display switch statement');
   }

@@ -13,6 +13,9 @@ function displayJokes() {
     case 'dispAll':
       jokeRequest = 'all';
       break;
+    case 'dispRand':
+      jokeRequest = 'random';
+      break;
     default:
       console.log('Error in displayJokes switch statement');
   }
@@ -85,6 +88,7 @@ function clearInputs(){
   $('#punchIn').val('');
   $('#authorIn').val('');
 }
+
 /// == JavaScript == ///
 
 $(document).ready(function(){
@@ -93,4 +97,6 @@ $(document).ready(function(){
   $('#dispAll').on('click',displayJokes);
 
   $('#jokeIn').on('click',addJoke);
+
+  $('#dispRand').on('click',displayJokes);
 }); // end document ready
