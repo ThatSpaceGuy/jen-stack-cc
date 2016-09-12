@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var path = require('path');
+var bodyParser = require('body-parser');
+var urlEncodedParser = bodyParser.urlencoded({extended:false});
 
 // initial jokes provided by the client
 var jokes = [
@@ -32,4 +35,25 @@ app.use(express.static('public'));
 app.get('/', function(req,res){
   console.log('base url hit');
   res.sendFile(path.resolve('public/index.html'));
+});
+
+// post routes to receive information from client
+app.post('/display', urlEncodedParser, function(req,res){
+  var jokeReq = req.body;
+  console.log('Route post / hit with', jokeReq);
+
+  var pagesToSend;
+  switch (jokeReq.dispReq) {
+    case 'all':
+      pagesToSend = jokes;
+      break;
+    default:
+      console.log('Error in server /display switch statement');
+  }
+
+  var jokeRes = {
+    jokePages: pagesToSend
+  };
+
+  res.send(jokeRes);
 });
