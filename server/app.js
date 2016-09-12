@@ -57,3 +57,13 @@ app.post('/display', urlEncodedParser, function(req,res){
 
   res.send(jokeRes);
 });
+
+// post routes to receive information from client
+app.post('/add', urlEncodedParser, function(req,res){
+  var jokeAdd = req.body;
+  console.log('Route post / hit with', jokeAdd);
+
+  jokes.push(jokeAdd);
+
+  res.sendStatus(200);
+});

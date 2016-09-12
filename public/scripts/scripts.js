@@ -48,6 +48,43 @@ function printPages(pages){
   $('#jokeBookDisplay').html(htmlToDisplay);
 }
 
+function addJoke(){
+  var newSetUp = $('#setUpIn').val();
+  var newPunch = $('#punchIn').val();
+
+  if (newSetUp === '' || newPunch === '') {
+    alert('Sorry! Set-up and Punchline are required fields!');
+  } else {
+    var newAuthor = $('#authorIn').val();
+    if (newAuthor === ''){
+      newAuthor = 'Anonymous';
+    }
+
+    jokeToSend = {whoseJoke: newAuthor, jokeQuestion: newSetUp, punchLine: newPunch};
+
+    $.ajax({
+            type: 'POST',
+            url: '/add',
+            data: jokeToSend,
+            success: function( data ){
+              console.log( 'got this from server - ' + data );
+              alert('Congratulations! Your joke was added to the Joke Book App!');
+              clearInputs();
+            },
+            statusCode: {
+              404: function(){
+                alert('404 Error! Cannot load page');
+              }
+            }
+          }); // end Ajax post code
+  }
+}
+
+function clearInputs(){
+  $('#setUpIn').val('');
+  $('#punchIn').val('');
+  $('#authorIn').val('');
+}
 /// == JavaScript == ///
 
 $(document).ready(function(){
@@ -55,4 +92,5 @@ $(document).ready(function(){
 
   $('#dispAll').on('click',displayJokes);
 
+  $('#jokeIn').on('click',addJoke);
 }); // end document ready
