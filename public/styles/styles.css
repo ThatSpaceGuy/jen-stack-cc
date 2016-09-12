@@ -9,3 +9,11 @@
 body {
 	text-align: center;
 }
+
+#jokeInputs {
+	border: 1px solid black;
+}
+
+#displayControls {
+	padding: 30px;
+}
